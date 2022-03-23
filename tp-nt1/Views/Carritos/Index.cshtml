@@ -1,0 +1,72 @@
+@model IEnumerable<CarritoItem>
+
+@{
+    ViewData["Title"] = "Mi carrito";
+}
+
+<h1>Mi carrito</h1>
+
+<p>
+    <a class="btn btn-outline-dark" asp-controller="Categorias" asp-action="Index">Agregar Productos</a>
+</p>
+
+<table class="table table-hover table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Producto.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorUnitario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subtotal)
+            </th>
+            <th></th>
+        </tr>
+        
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Producto.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorUnitario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subtotal)
+            </td>
+            <td>
+                @if (User.IsInRole(nameof(Rol.Empleado)) || User.IsInRole(nameof(Rol.Administrador)))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                }
+                <form method="post">
+                    <button class="btn btn-outline-success btn-sm" asp-controller="Carritos" asp-action="RemoverCarritoItem" name="carritoItemId" value="@item.Id">Quitar</button>
+                </form>
+            </td>             
+         </tr>
+        }
+    </tbody>
+
+</table>
+<form method="post" asp-controller="Sucursales" asp-action="VerificarStock">
+    <div class="col-lg-2 col-md-2 col-sm-12 p-0">
+        <select class="form-control search-input" name="sucursalId" asp-items="ViewBag.Sucursales">
+            <option value="">Elija una Sucursal</option>
+        </select>
+    </div>
+    <button class="btn btn-outline-success btn-sm">Realizar Compra</button>
+</form>
+<form method="post" asp-controller="Carritos" asp-action="VaciarCarrito">
+    <button class="btn btn-outline-success btn-sm">Vaciar Carrito</button>
+</form>

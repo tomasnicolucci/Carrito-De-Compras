@@ -1,0 +1,92 @@
+﻿@model IEnumerable<tp_nt1.Models.Administrador>
+@{
+    ViewData["Title"] = "Panel de Control";
+}
+<h1>Panel de Control</h1>
+<div class="row">
+
+    <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Empleados</h5>
+                <p class="card-text">Entre aquí para gestionar a los empleados</p>
+                <a class="btn btn-primary" asp-controller="Empleados" asp-action="Index">Ver más</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Sucursales</h5>
+                <p class="card-text">Entre aquí para gestionar las sucursales</p>
+                <a class="btn btn-primary" asp-controller="Sucursales" asp-action="Index">Ver más</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Categor&iacuteas</h5>
+                <p class="card-text">Entre aquí para gestionar las categor&iacuteas</p>
+                <a class="btn btn-primary" asp-controller="Categorias" asp-action="Index">Ver más</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Productos</h5>
+                <p class="card-text">Entre aquí para gestionar los productos</p>
+                <a class="btn btn-primary" asp-controller="Productos" asp-action="Index">Ver más</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Clientes</h5>
+                <p class="card-text">Entre aquí para ver los clientes</p>
+                <a class="btn btn-primary" asp-controller="Clientes" asp-action="Index">Ver más</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Compras</h5>
+                <p class="card-text">Entre aquí para ver todas las compras realizadas</p>
+                <a class="btn btn-primary" asp-controller="Compras" asp-action="Index">Ver más</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Compras del mes</h5>
+                <p class="card-text">Entre aquí para ver las compras del mes</p>
+                <a class="btn btn-primary" asp-controller="Compras" asp-action="ComprasDelMes">Ver más</a>
+            </div>
+        </div>
+    </div>
+
+    @if (User.IsInRole(nameof(Administrador)))
+    {
+        <div class="col-sm-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Administradores</h5>
+                    <p class="card-text">Entre aquí para gestionar los Administradores</p>
+                    <a class="btn btn-primary" asp-controller="Administradores" asp-action="Index">Ver más</a>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

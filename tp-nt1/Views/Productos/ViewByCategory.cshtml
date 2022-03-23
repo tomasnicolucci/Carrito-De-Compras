@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Producto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Productos de la categor&iacutea</h1>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecioVigente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EsActivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria)
+            </th>
+            <th></th>
+            <th>
+                @if (User.IsInRole(nameof(Rol.Empleado)) || User.IsInRole(nameof(Rol.Administrador)))
+                {
+
+                }
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecioVigente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EsActivo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria.Nombre)
+            </td>
+            <td>
+                @if (item.EsActivo && (User.IsInRole(nameof(Rol.Cliente)) || !User.Identity.IsAuthenticated))
+                {
+                    <form method="post">
+                        <input type="number" name="cantidad" id="cantProducto" min="1" />
+                        <button class="btn btn-outline-success btn-sm" asp-controller="Carritos" asp-action="AgregarCarritoItem" name="productoId" value="@item.Id">+ Agregar al carrito</button>
+                    </form>
+                }
+            </td>
+            <td>
+                 @if (User.IsInRole(nameof(Rol.Empleado)) || User.IsInRole(nameof(Rol.Administrador)))
+                 {
+                    <a  class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">Detalles</a>
+                 }
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>

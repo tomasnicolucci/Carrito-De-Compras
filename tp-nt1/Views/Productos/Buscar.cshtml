@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Producto>
+    
+  <partial name="~/Views/Productos/_Search.cshtml" />
+<hr />
+    <div class="table-responsive">
+        <table class="table table-hover table-striped table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Producto producto in Model)
+                {
+                <tr>
+                    <td>
+                        @producto.Nombre
+                    </td>
+                    <td>
+                        @producto.Descripcion
+                    </td>
+                    <td>
+                        @producto.Categoria.Nombre
+                    </td>
+                    <td>
+                        $ @producto.PrecioVigente.ToString("N2")
+                    </td>
+                    <td>
+                        @if (producto.EsActivo && (User.IsInRole(nameof(Rol.Cliente))||!User.Identity.IsAuthenticated))
+                        {
+                            <form method="post">
+                                <input type="number" name="cantidad" id="cantProducto" min="1" />
+                                <button class="btn btn-outline-success btn-sm" asp-controller="Carritos" asp-action="AgregarCarritoItem" name="productoId" value="@producto.Id">+ Agregar al carrito</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>

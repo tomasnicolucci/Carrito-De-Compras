@@ -1,0 +1,52 @@
+@model tp_nt1.Models.Producto
+
+@{
+    ViewData["Title"] = "Editar producto";
+}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"> Editar producto </h5>
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="Nombre" class="control-label"></label>
+                        <input asp-for="Nombre" class="form-control" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Descripcion" class="control-label"></label>
+                        <input asp-for="Descripcion" class="form-control" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PrecioVigente" class="control-label"></label>
+                        <input asp-for="PrecioVigente" class="form-control" />
+                        <span asp-validation-for="PrecioVigente" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="EsActivo" /> @Html.DisplayNameFor(model => model.EsActivo)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CategoriaId" class="control-label"></label>
+                        <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId"></select>
+                        <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Guardar cambios" class="btn btn-primary" />
+                        <a class="btn btn-danger" asp-action="Index">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }

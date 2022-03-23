@@ -1,0 +1,28 @@
+@model IEnumerable<tp_nt1.Models.Carrito>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Mi carrito</h1>
+
+@if (User.IsInRole(nameof(Rol.Empleado)) || User.IsInRole(nameof(Rol.Administrador)))
+{
+    <p>
+        <a asp-action="Create">Crear nuevo carrito</a>
+    </p>
+}
+<p>
+    @TempData["Message"]
+</p>
+<p>
+    <a class="btn btn-outline-dark" asp-controller="Categorias" asp-action="Index">Agregar Productos</a>
+</p>
+<form method="post" asp-controller="Sucursales" asp-action="VerificarStock">
+    <div class="col-lg-2 col-md-2 col-sm-12 p-0">
+        <select class="form-control search-input" name="sucursalId" asp-items="ViewBag.Sucursales">
+            <option value="">Elija una Sucursal</option>
+        </select>
+    </div>
+    <button class="btn btn-outline-success btn-sm">Realizar Compra</button>
+</form>

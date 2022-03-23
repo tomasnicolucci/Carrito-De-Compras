@@ -1,0 +1,37 @@
+@model tp_nt1.Models.StockItem
+
+@{
+    ViewData["Title"] = "Eliminar item";
+}
+
+<h1>Eliminar item</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cantidad)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sucursal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sucursal.Nombre)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Producto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Producto.Nombre)
+        </dd class>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        <a class="btn btn-outline-info" asp-action="Index">Volver</a>
+    </form>
+</div>

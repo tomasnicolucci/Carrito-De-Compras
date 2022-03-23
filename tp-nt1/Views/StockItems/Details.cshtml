@@ -1,0 +1,42 @@
+@model tp_nt1.Models.StockItem
+
+@{
+    ViewData["Title"] = "Detalles del producto";
+}
+
+<h1>Detalles del producto</h1>
+
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Producto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Producto.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            Descripci&oacuten
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Producto.Descripcion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cantidad)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sucursal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sucursal.Nombre)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Editar</a>
+    <a class="btn btn-danger" asp-action="Index">Volver</a>
+</div>

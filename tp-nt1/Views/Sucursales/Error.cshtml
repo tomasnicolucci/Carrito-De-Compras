@@ -1,0 +1,12 @@
+﻿@model IEnumerable<tp_nt1.Models.Sucursal>
+
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1>Error</h1>
+
+<h2> No se puede eliminar la sucursal.</h2>
+<h2> Para eliminarla primero debe eliminar todos los items que se encuentren en stock.</h2>
+
+<a class="btn btn-danger" asp-action="Index">Volver</a>

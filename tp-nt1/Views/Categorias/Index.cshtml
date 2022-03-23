@@ -1,0 +1,37 @@
+@model IEnumerable<tp_nt1.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Categorias";
+}
+
+<h1>Categor&iacuteas</h1>
+
+@if (User.IsInRole(nameof(Rol.Empleado)) || User.IsInRole(nameof(Rol.Administrador)))
+{
+    <p>
+        <a class="btn btn-outline-dark" asp-action="Create">Crear nueva categor&iacutea</a>
+    </p>
+}
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4">
+            <div class="card" style="width: 15rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                    <form asp-action="ViewByCategory" asp-controller="Productos" method="get" novalidate="novalidate">
+                        <button value="@item.Id" class="btn btn-outline-primary" type="submit" name="categoriaId">Ver Productos</button>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning">Info</a>
+                        @if (User.IsInRole(nameof(Rol.Empleado)) || User.IsInRole(nameof(Rol.Administrador)))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                         }
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+

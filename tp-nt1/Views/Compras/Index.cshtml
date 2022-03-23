@@ -1,0 +1,51 @@
+@model IEnumerable<tp_nt1.Models.Compra>
+
+@{
+    ViewData["Title"] = "Compras";
+}
+
+<h1>Compras</h1>
+
+<h3>Registro de todas las compras realizadas por los clientes</h3>
+
+<table class="table table-hover table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Carrito)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cliente.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Carrito.Id)
+                </td>
+                <td>
+                    <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">Detalles</a> 
+                    @if (User.IsInRole(nameof(Rol.Administrador)) || User.IsInRole(nameof(Rol.Empleado)))
+                    {
+                        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                    }
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

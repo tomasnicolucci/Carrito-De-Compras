@@ -1,0 +1,56 @@
+@model tp_nt1.Models.Carrito
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Activo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Activo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Subtotal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Subtotal)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cliente)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cliente.Apellido)
+        </dd>
+    </dl>
+</div>
+@foreach(var carritoItem in Model.CarritoItems)
+            {
+    <div class="card">
+        <div class="card-body">
+            @carritoItem.Producto.Descripcion x @carritoItem.Cantidad x @carritoItem.Subtotal
+            <form method="post">
+                <button class="btn btn-outline-success btn-sm" asp-action="RemoverCarritoItem" name="carritoItemId" value="@carritoItem.Id">Eliminar</button>
+            </form>
+        </div>
+    </div>
+            }
+<div>
+    <form method="post">
+        <button class="btn btn-outline-success btn-sm" asp-action="VaciarCarrito">Vaciar Carrito</button>
+    </form>
+    <a asp-action="Index">Volver</a>
+</div>
+<form method="post" asp-controller="Sucursales" asp-action="VerificarStock">
+    <div class="col-lg-2 col-md-2 col-sm-12 p-0">
+        <select class="form-control search-input" name="sucursalId" asp-items="ViewBag.Sucursales">
+            <option value="">Elija una Sucursal</option>
+        </select>
+    </div>
+    <button class="btn btn-outline-success btn-sm">Realizar Compra</button>
+</form>
